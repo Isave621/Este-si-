@@ -28,11 +28,11 @@
     <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th width="35%">Código seviviotour</th>
+            <th width="35%">Código sevicio tour</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Estado</th>
-            <th>Descripcion</th>
+            <th>Descripción</th>
           </tr>
         </thead>
         <tbody>
@@ -40,7 +40,7 @@
         <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'treserva' y los listamos -->
         {% for servitour in object_list %}
           <tr>
-            <td>{{ servitour.idserviciotour }}</td>
+            <td>{{ servitour.idserviciotour}}</td>
             <td>{{ servitour.nombre}}</td>
             <td>{{ servitour.precio }}</td>
             <td>{{ servitour.estado}}</td>

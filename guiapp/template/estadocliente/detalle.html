@@ -7,13 +7,26 @@
   {# Widget Tweaks #}
   {% load widget_tweaks %}
 
-<h4>Detalles</h4>
- 
-<p><span class="txt_negrita">Codigo de categoria:</span> <br> {{object.idestadocliente}}</p>
-<p><span class="txt_negrita">Activo:</span> <br> {{object.activo}}</p>
-<p><span class="txt_negrita">inactivo:</span> <br> {{object.inactivo}}</p>
-<p><span class="txt_negrita">Creado:</span> <br> {{object.created_at}}</p>
-<p><span class="txt_negrita">Actualizado:</span> <br> {{object.updated_at}}</p>
+
+<div class="card text-start|center|end">
+    <h4 class="card-title">Detalles</h4>
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item" align="center">
+    <p><span class="txt_negrita">Código de categoria: </span>{{object.idestadocliente}}</p></li>
+  <li class="list-group-item" align="center">
+    <p><span class="txt_negrita">Activo:</span> <br> {{object.activo}}</p></li>
+  <li class="list-group-item" align="center">
+    <p><span class="txt_negrita" >Inactivo:</span> <br> {{object.inactivo}}</p></li>
+    <li class="list-group-item" align="center">
+      <p><span class="txt_negrita" >Inactivo:</span> <br> {{object.inactivo}}</p></li>
+  <li class="list-group-item" align="center">
+    <p><span class="txt_negrita">Creado:</span> <br> {{object.created_at}}</p></li>
+  <li class="list-group-item" align="center">
+    <p><span class="txt_negrita">Actualizado:</span> <br> {{object.updated_at}}</p></li>
+</ul>
+
  
 <!-- Botón para volver a la vista principal (Home) -->
 <a href="../" type="submit" class="btn btn-primary">Volver</a>

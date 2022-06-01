@@ -15,247 +15,247 @@ Including another URLconf
 """
 from re import template
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from principal.views import *
+from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('formulario/', formulario),
     path('contactar/', contactar),
     path('indexprincipal/', indexprincipal),
-    path('inicio/', inicio),
-    path('comienzo/', comienzo),
-    path('comienzo/usuario/', usuario),
-    path('comienzo/clienteUs/', clienteUs),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/profile/', inicio),
+    path('accounts/profile/salir/', salir),
+    path('Registrarse/', register, name= 'register'),
+    path('login/', LoginView.as_view(template_name='registration/registration.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
 
-    path('comienzo/clienteUs/comentario/', ListadoComentarios.as_view(template_name = "comentarios/inicio.html"),),
-
-    path('comienzo/usuario/tiporeserva/', ListadoTiporeserva.as_view(template_name = "tiporeserva/inicio.html"), name='leer'),
+    path('tiporeserva/', ListadoTiporeserva.as_view(template_name = "tiporeserva/inicio.html"), name='1leer'),
     
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un Tiporeserva o registro 
-    path('comienzo/usuario/tiporeserva/detalle/<int:pk>', TiporeservaDetalle.as_view(template_name = "tiporeserva/detalle.html"), name='detalles'),
+    path('tiporeserva/detalle/<int:pk>', TiporeservaDetalle.as_view(template_name = "tiporeserva/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Tiporeserva o registro  
-    path('comienzo/usuario/tiporeserva/crear', TiporeservaCrear.as_view(template_name = "tiporeserva/crear.html"), name='crear'),
+    path('tiporeserva/crear', TiporeservaCrear.as_view(template_name = "tiporeserva/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Tiporeservao registro de la Base de Datos 
-    path('comienzo/usuario/tiporeserva/editar/<int:pk>', TiporeservaActualizar.as_view(template_name = "tiporeserva/actualizar.html"), name='actualizar'), 
+    path('tiporeserva/editar/<int:pk>', TiporeservaActualizar.as_view(template_name = "tiporeserva/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un Tiporeserva o registro de la Base de Datos 
-    path('comienzo/usuario/tiporeserva/eliminar/<int:pk>', TiporeservaEliminar.as_view(), name='tiporeserva/eliminar.html'), 
+    path('tiporeserva/eliminar/<int:pk>', TiporeservaEliminar.as_view(), name='tiporeserva/eliminar.html'), 
 
 
-    path('comienzo/clienteUs/comentarios/', ListadoComentarios.as_view(template_name = "comentarios/inicio.html"), name='leer'),
+    path('comentarios/', ListadoComentarios.as_view(template_name = "comentarios/inicio.html"), name='2leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un comentarios o registro 
-    path('comienzo/clienteUs/comentarios/detalle/<int:pk>', ComentariosDetalle.as_view(template_name = "comentarios/detalle.html"), name='detalles'),
+    path('comentarios/detalle/<int:pk>', ComentariosDetalle.as_view(template_name = "comentarios/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo comentarios o registro  
-    path('comienzo/clienteUs/comentarios/crear', ComentariosCrear.as_view(template_name = "comentarios/crear.html"), name='crear'),
+    path('comentarios/crear', ComentariosCrear.as_view(template_name = "comentarios/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un comentarioso registro de la Base de Datos 
-    path('comienzo/clienteUs/comentarios/editar/<int:pk>', ComentariosActualizar.as_view(template_name = "comentarios/actualizar.html"), name='actualizar'), 
+    path('comentarios/editar/<int:pk>', ComentariosActualizar.as_view(template_name = "comentarios/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un comentarios o registro de la Base de Datos 
-    path('comienzo/clienteUs/comentarios/eliminar/<int:pk>', ComentariosEliminar.as_view(), name='comentarios/eliminar.html'), 
+    path('comentarios/eliminar/<int:pk>', ComentariosEliminar.as_view(), name='comentarios/eliminar.html'),    
 
 
 
-    path('comienzo/usuario/rutas/', ListadoRutas.as_view(template_name = "rutas/inicio.html"), name='leer'),
+    path('rutas/', ListadoRutas.as_view(template_name = "rutas/inicio.html"), name='3leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un rutas o registro 
-    path('comienzo/usuario/rutas/detalle/<int:pk>', RutasDetalle.as_view(template_name = "rutas/detalle.html"), name='detalles'),
+    path('rutas/detalle/<int:pk>', RutasDetalle.as_view(template_name = "rutas/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo rutas o registro  
-    path('comienzo/usuario/rutas/crear', RutasCrear.as_view(template_name = "rutas/crear.html"), name='crear'),
+    path('rutas/crear', RutasCrear.as_view(template_name = "rutas/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un rutaso registro de la Base de Datos 
-    path('comienzo/usuario/rutas/editar/<int:pk>', RutasActualizar.as_view(template_name = "rutas/actualizar.html"), name='actualizar'), 
+    path('rutas/editar/<int:pk>', RutasActualizar.as_view(template_name = "rutas/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un rutas o registro de la Base de Datos 
-    path('comienzo/usuario/rutas/eliminar/<int:pk>', RutasEliminar.as_view(), name='rutas/eliminar.html'),    
+    path('rutas/eliminar/<int:pk>', RutasEliminar.as_view(), name='rutas/eliminar.html'),    
 
 
-    path('comienzo/usuario/tipolugar/', ListadoTipolugar.as_view(template_name = "tipolugar/inicio.html"), name='leer'),
+    path('tipolugar/', ListadoTipolugar.as_view(template_name = "tipolugar/inicio.html"), name='4leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un tipolugar o registro 
-    path('comienzo/usuario/tipolugar/detalle/<int:pk>', TipolugarDetalle.as_view(template_name = "tipolugar/detalle.html"), name='detalles'),
+    path('tipolugar/detalle/<int:pk>', TipolugarDetalle.as_view(template_name = "tipolugar/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo tipolugar o registro  
-    path('comienzo/usuario/tipolugar/crear', TipolugarCrear.as_view(template_name = "tipolugar/crear.html"), name='crear'),
+    path('tipolugar/crear', TipolugarCrear.as_view(template_name = "tipolugar/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un tipolugaro registro de la Base de Datos 
-    path('comienzo/usuario/tipolugar/editar/<int:pk>', TipolugarActualizar.as_view(template_name = "tipolugar/actualizar.html"), name='actualizar'), 
+    path('tipolugar/editar/<int:pk>', TipolugarActualizar.as_view(template_name = "tipolugar/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un tipolugar o registro de la Base de Datos 
-    path('comienzo/usuario/tipolugar/eliminar/<int:pk>', TipolugarEliminar.as_view(), name='tipolugar/eliminar.html'),    
+    path('tipolugar/eliminar/<int:pk>', TipolugarEliminar.as_view(), name='tipolugar/eliminar.html'),    
     
     
 
-    path('comienzo/clienteUs/empresa/', ListadoEmpresa.as_view(template_name = "empresa/inicio.html"), name='leer'),
+    path('empresa/', ListadoEmpresa.as_view(template_name = "empresa/inicio.html"), name='5leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un empresa o registro 
-    path('comienzo/clienteUs/empresa/detalle/<int:pk>', EmpresaDetalle.as_view(template_name = "empresa/detalle.html"), name='detalles'),
+    path('empresa/detalle/<int:pk>', EmpresaDetalle.as_view(template_name = "empresa/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo empresa o registro  
-    path('comienzo/clienteUs/empresa/crear', EmpresaCrear.as_view(template_name = "empresa/crear.html"), name='crear'),
+    path('empresa/crear', EmpresaCrear.as_view(template_name = "empresa/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un empresao registro de la Base de Datos 
-    path('comienzo/clienteUs/empresa/editar/<int:pk>', EmpresaActualizar.as_view(template_name = "empresa/actualizar.html"), name='actualizar'), 
+    path('empresa/editar/<int:pk>', EmpresaActualizar.as_view(template_name = "empresa/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un empresa o registro de la Base de Datos 
-    path('comienzo/clienteUs/empresa/eliminar/<int:pk>', EmpresaEliminar.as_view(), name='empresa/eliminar.html'),
+    path('empresa/eliminar/<int:pk>', EmpresaEliminar.as_view(), name='empresa/eliminar.html'),
     
 
 
 
 
 
-    path('comienzo/usuario/estadocliente/', ListadoEstadocliente.as_view(template_name = "estadocliente/inicio.html"), name='leer'),
+    path('estadocliente/', ListadoEstadocliente.as_view(template_name = "estadocliente/inicio.html"), name='6leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un Estadocliente o registro 
-    path('comienzo/usuario/estadocliente/detalle/<int:pk>', EstadoclienteDetalle.as_view(template_name = "estadocliente/detalle.html"), name='detalles'),
+    path('estadocliente/detalle/<int:pk>', EstadoclienteDetalle.as_view(template_name = "estadocliente/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Estadocliente o registro  
-    path('comienzo/usuario/estadocliente/crear', EstadoclienteCrear.as_view(template_name = "estadocliente/crear.html"), name='crear'),
+    path('estadocliente/crear', EstadoclienteCrear.as_view(template_name = "estadocliente/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Estadoclienteo registro de la Base de Datos 
-    path('comienzo/usuario/estadocliente/editar/<int:pk>', EstadoclienteActualizar.as_view(template_name = "estadocliente/actualizar.html"), name='actualizar'), 
+    path('estadocliente/editar/<int:pk>', EstadoclienteActualizar.as_view(template_name = "estadocliente/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un Estadocliente o registro de la Base de Datos 
-    path('comienzo/usuario/estadocliente/eliminar/<int:pk>', EstadoclienteEliminar.as_view(), name='estadocliente/eliminar.html'),    
+    path('estadocliente/eliminar/<int:pk>', EstadoclienteEliminar.as_view(), name='estadocliente/eliminar.html'),    
 
     
     
     
-    path('comienzo/usuario/tipodocumento/', ListadoTipodocumento.as_view(template_name = "tipodocumento/inicio.html"), name='leer'),
+    path('tipodocumento/', ListadoTipodocumento.as_view(template_name = "tipodocumento/inicio.html"), name='7leer'),
  
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un Tipodocumento o registro 
-    path('comienzo/usuario/tipodocumento/detalle/<int:pk>', TipodocumentoDetalle.as_view(template_name = "tipodocumento/detalle.html"), name='detalles'),
+    # La ruta 'detalles' en donde mostraremos una página con los detalles de un tipodocumento o registro 
+    path('tipodocumento/detalle/<int:pk>', TipodocumentoDetalle.as_view(template_name = "tipodocumento/detalle.html"), name='detalles'),
  
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Tipodocumento o registro  
-    path('comienzo/usuario/tipodocumento/crear', TipodocumentoCrear.as_view(template_name = "tipodocumento/crear.html"), name='crear'),
+    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo tipodocumento o registro  
+    path('tipodocumento/crear', TipodocumentoCrear.as_view(template_name = "tipodocumento/crear.html"), name='crear'),
  
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Tipodocumentoo registro de la Base de Datos 
-    path('comienzo/usuario/tipodocumento/editar/<int:pk>', TipodocumentoActualizar.as_view(template_name = "tipodocumento/actualizar.html"), name='actualizar'), 
+    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un tipodocumentoo registro de la Base de Datos 
+    path('tipodocumento/editar/<int:pk>', TipodocumentoActualizar.as_view(template_name = "tipodocumento/actualizar.html"), name='actualizar'), 
  
-    # La ruta 'eliminar' que usaremos para eliminar un Tipodocumento o registro de la Base de Datos 
-    path('comienzo/usuario/tipodocumento/eliminar/<int:pk>', TipodocumentoEliminar.as_view(), name='tipodocumento/eliminar.html'),    
+    # La ruta 'eliminar' que usaremos para eliminar un tipodocumento o registro de la Base de Datos 
+    path('tipodocumento/eliminar/<int:pk>', TipodocumentoEliminar.as_view(), name='tipodocumento/eliminar.html'),   
+  
 
 
 
 
-    path('comienzo/clienteUs/reservas/', ListadoReservas.as_view(template_name = "reservas/inicio.html"), name='leer'),
+    path('reservas/', ListadoReservas.as_view(template_name = "reservas/inicio.html"), name='8leer'),
  
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un Reservas o registro 
-    path('comienzo/clienteUs/reservas/detalle/<int:pk>', ReservasDetalle.as_view(template_name = "reservas/detalle.html"), name='detalles'),
+    # La ruta 'detalles' en donde mostraremos una página con los detalles de un reservas o registro 
+    path('reservas/detalle/<int:pk>', ReservasDetalle.as_view(template_name = "reservas/detalle.html"), name='detalles'),
  
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Reservas o registro  
-    path('comienzo/clienteUs/reservas/crear', ReservasCrear.as_view(template_name = "reservas/crear.html"), name='crear'),
+    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo reservas o registro  
+    path('reservas/crear', ReservasCrear.as_view(template_name = "reservas/crear.html"), name='crear'),
  
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Reservaso registro de la Base de Datos 
-    path('comienzo/clienteUs/reservas/editar/<int:pk>', ReservasActualizar.as_view(template_name = "reservas/actualizar.html"), name='actualizar'), 
+    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un reservaso registro de la Base de Datos 
+    path('reservas/editar/<int:pk>', ReservasActualizar.as_view(template_name = "reservas/actualizar.html"), name='actualizar'), 
  
-    # La ruta 'eliminar' que usaremos para eliminar un Reservas o registro de la Base de Datos 
-    path('comienzo/clienteUs/reservas/eliminar/<int:pk>', ReservasEliminar.as_view(), name='reservas/eliminar.html'),    
+    # La ruta 'eliminar' que usaremos para eliminar un reservas o registro de la Base de Datos 
+    path('reservas/eliminar/<int:pk>', ReservasEliminar.as_view(), name='reservas/eliminar.html'),    
+   
 
  
 
-    path('comienzo/usuario/serviciotour/', ListadoServiciotour.as_view(template_name = "serviciotour/inicio.html"), name='leer'),
+    path('serviciotour/', ListadoServiciotour.as_view(template_name = "serviciotour/inicio.html"), name='9leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un Serviciotour o registro 
-    path('comienzo/usuario/serviciotour/detalle/<int:pk>', ServiciotourDetalle.as_view(template_name = "serviciotour/detalle.html"), name='detalles'),
+    path('serviciotour/detalle/<int:pk>', ServiciotourDetalle.as_view(template_name = "serviciotour/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Serviciotour o registro  
-    path('comienzo/usuario/serviciotour/crear', ServiciotourCrear.as_view(template_name = "serviciotour/crear.html"), name='crear'),
+    path('serviciotour/crear', ServiciotourCrear.as_view(template_name = "serviciotour/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Serviciotouro registro de la Base de Datos 
-    path('comienzo/usuario/serviciotour/editar/<int:pk>', ServiciotourActualizar.as_view(template_name = "serviciotour/actualizar.html"), name='actualizar'), 
+    path('serviciotour/editar/<int:pk>', ServiciotourActualizar.as_view(template_name = "serviciotour/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un Serviciotour o registro de la Base de Datos 
-    path('comienzo/usuario/serviciotour/eliminar/<int:pk>', ServiciotourEliminar.as_view(), name='serviciotour/eliminar.html'),
+    path('serviciotour/eliminar/<int:pk>', ServiciotourEliminar.as_view(), name='serviciotour/eliminar.html'),
 
 
 
 
-    path('comienzo/usuario/ofertas/', ListadoOfertas.as_view(template_name = "ofertas/inicio.html"), name='leer'),
+    path('ofertas/', ListadoOfertas.as_view(template_name = "ofertas/inicio.html"), name='10leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un Ofertas o registro 
-    path('comienzo/usuario/ofertas/detalle/<int:pk>', OfertasDetalle.as_view(template_name = "ofertas/detalle.html"), name='detalles'),
+    path('ofertas/detalle/<int:pk>', OfertasDetalle.as_view(template_name = "ofertas/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Ofertas o registro  
-    path('comienzo/usuario/ofertas/crear', OfertasCrear.as_view(template_name = "ofertas/crear.html"), name='crear'),
+    path('ofertas/crear', OfertasCrear.as_view(template_name = "ofertas/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Ofertaso registro de la Base de Datos 
-    path('comienzo/usuario/ofertas/editar/<int:pk>', OfertasActualizar.as_view(template_name = "ofertas/actualizar.html"), name='actualizar'), 
+    path('ofertas/editar/<int:pk>', OfertasActualizar.as_view(template_name = "ofertas/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un Ofertas o registro de la Base de Datos 
-    path('comienzo/usuario/ofertas/eliminar/<int:pk>', OfertasEliminar.as_view(), name='ofertas/eliminar.html'),    
+    path('ofertas/eliminar/<int:pk>', OfertasEliminar.as_view(), name='ofertas/eliminar.html'),    
 
 
-    path('comienzo/usuario/lugar/', ListadoLugar.as_view(template_name = "lugar/inicio.html"), name='leer'),
+    path('lugar/', ListadoLugar.as_view(template_name = "lugar/inicio.html"), name='11leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un lugar o registro 
-    path('comienzo/usuario/lugar/detalle/<int:pk>', LugarDetalle.as_view(template_name = "lugar/detalle.html"), name='detalles'),
+    path('lugar/detalle/<int:pk>', LugarDetalle.as_view(template_name = "lugar/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo lugar o registro  
-    path('comienzo/usuario/lugar/crear', LugarCrear.as_view(template_name = "lugar/crear.html"), name='crear'),
+    path('lugar/crear', LugarCrear.as_view(template_name = "lugar/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un lugaro registro de la Base de Datos 
-    path('comienzo/usuario/lugar/editar/<int:pk>', LugarActualizar.as_view(template_name = "lugar/actualizar.html"), name='actualizar'), 
+    path('lugar/editar/<int:pk>', LugarActualizar.as_view(template_name = "lugar/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un lugar o registro de la Base de Datos 
-    path('comienzo/usuario/lugar/eliminar/<int:pk>', LugarEliminar.as_view(), name='lugar/eliminar.html'),  
+    path('lugar/eliminar/<int:pk>', LugarEliminar.as_view(), name='lugar/eliminar.html'),  
 
 
 
 
-    path('comienzo/usuario/eventos/', ListadoEventos.as_view(template_name = "eventos/inicio.html"), name='leer'),
+    path('eventos/', ListadoEventos.as_view(template_name = "eventos/inicio.html"), name='12leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un Eventos o registro 
-    path('comienzo/usuario/eventos/detalle/<int:pk>', EventosDetalle.as_view(template_name = "eventos/detalle.html"), name='detalles'),
+    path('eventos/detalle/<int:pk>', EventosDetalle.as_view(template_name = "eventos/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo Eventos o registro  
-    path('comienzo/usuario/eventos/crear', EventosCrear.as_view(template_name = "eventos/crear.html"), name='crear'),
+    path('eventos/crear', EventosCrear.as_view(template_name = "eventos/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Eventoso registro de la Base de Datos 
-    path('comienzo/usuario/eventos/editar/<int:pk>', EventosActualizar.as_view(template_name = "eventos/actualizar.html"), name='actualizar'), 
+    path('eventos/editar/<int:pk>', EventosActualizar.as_view(template_name = "eventos/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un Eventos o registro de la Base de Datos 
-    path('comienzo/usuario/eventos/eliminar/<int:pk>', EventosEliminar.as_view(), name='eventos/eliminar.html'),  
+    path('eventos/eliminar/<int:pk>', EventosEliminar.as_view(), name='eventos/eliminar.html'),  
 
 
-    path('comienzo/clienteUs/persona/', ListadoPersona.as_view(template_name = "persona/inicio.html"), name='leer'),
+    path('persona/', ListadoPersona.as_view(template_name = "persona/inicio.html"), name='13leer'),
  
     # La ruta 'detalles' en donde mostraremos una página con los detalles de un persona o registro 
-    path('comienzo/clienteUs/persona/detalle/<int:pk>', PersonaDetalle.as_view(template_name = "persona/detalle.html"), name='detalles'),
+    path('persona/detalle/<int:pk>', PersonaDetalle.as_view(template_name = "persona/detalle.html"), name='detalles'),
  
     # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo persona o registro  
-    path('comienzo/clienteUs/persona/crear', PersonaCrear.as_view(template_name = "persona/crear.html"), name='crear'),
+    path('persona/crear', PersonaCrear.as_view(template_name = "persona/crear.html"), name='crear'),
  
     # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un personao registro de la Base de Datos 
-    path('comienzo/clienteUs/persona/editar/<int:pk>', PersonaActualizar.as_view(template_name = "persona/actualizar.html"), name='actualizar'), 
+    path('persona/editar/<int:pk>', PersonaActualizar.as_view(template_name = "persona/actualizar.html"), name='actualizar'), 
  
     # La ruta 'eliminar' que usaremos para eliminar un persona o registro de la Base de Datos 
-    path('comienzo/clienteUs/persona/eliminar/<int:pk>', PersonaEliminar.as_view(), name='persona/eliminar.html'),  
+    path('persona/eliminar/<int:pk>', PersonaEliminar.as_view(), name='persona/eliminar.html'),  
 
 
-
-    path('tipoevento/', ListadoTipoeventos.as_view(template_name = "tipoevento/index.html"), name='leer'),
+    path('tipoeventos/', ListadoTipoeventos.as_view(template_name = "tipoeventos/inicio.html"), name='14leer'),
  
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un tipoevento o registro 
-    path('tipoevento/detalle/<int:pk>', TipoeventosDetalle.as_view(template_name = "tipoevento/detalle.html"), name='detalles'),
+    # La ruta 'detalles' en donde mostraremos una página con los detalles de un tipoeventos o registro 
+    path('tipoeventos/detalle/<int:pk>', TipoeventosDetalle.as_view(template_name = "tipoeventos/detalle.html"), name='detalles'),
  
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo tipoevento o registro  
-    path('tipoevento/crear', TipoeventosCrear.as_view(template_name = "tipoevento/crear.html"), name='crear'),
+    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo tipoeventos o registro  
+    path('tipoeventos/crear', TipoeventosCrear.as_view(template_name = "tipoeventos/crear.html"), name='crear'),
  
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un tipoeventoo registro de la Base de Datos 
-    path('tipoevento/editar/<int:pk>', TipoeventosActualizar.as_view(template_name = "tipoevento/actualizar.html"), name='actualizar'), 
+    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un tipoeventoso registro de la Base de Datos 
+    path('tipoeventos/editar/<int:pk>', TipoeventosActualizar.as_view(template_name = "tipoeventos/actualizar.html"), name='actualizar'), 
  
-    # La ruta 'eliminar' que usaremos para eliminar un tipoevento o registro de la Base de Datos 
-    path('tipoevento/eliminar/<int:pk>', TipoeventosEliminar.as_view(), name='tipoevento/eliminar.html'),    
+    # La ruta 'eliminar' que usaremos para eliminar un tipoeventos o registro de la Base de Datos 
+    path('tipoeventos/eliminar/<int:pk>', TipoeventosEliminar.as_view(), name='tipoeventos/eliminar.html'),    
 
-
-  
 ]
 
 
