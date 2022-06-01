@@ -3,8 +3,10 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from .forms import CustoumUserForm
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+
+
 
 
 
@@ -27,7 +29,7 @@ from django import forms
 
 # Create your views here.
 
-@login_required 
+@login_required  
 
 
 def inicio(request):
@@ -37,24 +39,22 @@ def salir(request):
     logout(request)
     return redirect('/')
 
+def registroUsuario(request):
+    data ={
+        'form':CustoumUserForm()
+    }
 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
+    if request.method == 'post':
+        formulario = CustoumUserForm(request.post)
+        if formulario.is_valid():
+            formulario.save()
+            username = formulario.cleaned_data['username']
+            password = formulario.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-            login(request, user) 
-            messages.success(request, f'Usuario {username} creado')         
-            return redirect('plantilla')
-            
-    else:
-        form = UserCreationForm()
+            login(request, user)
 
-    return render(request, 'registration/registration.html', {"form": form} )
+
+    return render(request, 'registration/registro.html', data)
 
 
 

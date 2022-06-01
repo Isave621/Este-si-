@@ -17,8 +17,9 @@ from re import template
 from django.contrib import admin
 from django.urls import path, include
 from principal.views import *
-from django.contrib.auth.views import LoginView, LogoutView
+
 urlpatterns = [
+    path('', inicio),
     path('admin/', admin.site.urls),
     path('formulario/', formulario),
     path('contactar/', contactar),
@@ -26,9 +27,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/profile/', inicio),
     path('accounts/profile/salir/', salir),
-    path('Registrarse/', register, name= 'register'),
-    path('login/', LoginView.as_view(template_name='registration/registration.html'), name='login'),
-    path('logout/', LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
+    path('registro/', registroUsuario, name="registroUsuario"),
+
 
     path('tiporeserva/', ListadoTiporeserva.as_view(template_name = "tiporeserva/inicio.html"), name='1leer'),
     
