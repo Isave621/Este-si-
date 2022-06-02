@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Mi destino</title>
+  <title>Sobre Nostros</title>
 	<link rel="icon" href="img/Fevicon.png" type="image/png">
 
   <link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
@@ -19,14 +19,14 @@
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body class="bg-shape">
+<body>
 
   <!--================ Header Menu Area start =================-->
   <header class="header_area">
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container box_1620">
-          <a class="navbar-brand logo_h" href="profile/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+          <a class="navbar-brand logo_h" href="index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -35,7 +35,7 @@
 
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
-              <li class="nav-item active"><a class="nav-link" href="profile/">Home</a></li> 
+              <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
               <li class="nav-item"><a class="nav-link" href="sobre/">Sobre nosotros</a></li> 
               <li class="nav-item"><a class="nav-link" href="paquete/">Tours</a>
               <li class="nav-item submenu dropdown">
@@ -62,72 +62,17 @@
   <!--================Header Menu Area =================-->
 
 
-  <!--================Hero Banner Area Start =================-->
-  <section class="hero-banner magic-ball">
-    <div class="container">
 
-      <div class="row align-items-center text-center text-md-left">
-        <div class="col-md-6 col-lg-5 mb-5 mb-md-0">
-          <h1>MI DESTINO</h1>
-          <p>¿Realmete conoce se ciudad? Si la respuesta es negativa, Tu Destino es la mejor opción para ti </p>
-          <a class="button button-hero mt-4" href="registro/">Registrarse</a>
-        </div>
-        <div class="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
-          <img class="img-fluid" src="{% static 'img/home/hero-img.png' %}" alt="">
-        </div>
+  <!--================Hero Banner SM Area Start =================-->
+  <section class="hero-banner-sm magic-ball magic-ball-banner" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
+    <div class="container">
+      <div class="hero-banner-sm-content">
+        <h1>Sobre Nosotros</h1>
+        <p>Aquí encoontraras información sobre nuestra empresa</p>
       </div>
     </div>
   </section>
-  <!--================Hero Banner Area End =================-->
-
-
-  <!--================Service Area Start =================-->
-  <section class="section-margin generic-margin">
-    <div class="container">
-      <div class="section-intro text-center pb-90px">
-        <img class="section-intro-img" src="{% static 'img/home/section-icon.png' %}" alt="">
-        <h2>Nuestros servicios más populares</h2>
-        <p>Aquí podras ver los servicios más amados por nuestros ususarios</p>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="service-card text-center">
-            <div class="service-card-img">
-              <img class="img-fluid" src="{% static 'img/home/service1.png' %}" alt="">
-            </div>
-            <div class="service-card-body">
-              <h3>Hoteles</h3>
-              <p>Great so dominion two seed give dry rule be fowl him female you will gathered creeping and created air</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="service-card text-center">
-            <div class="service-card-img">
-              <img class="img-fluid" src="{% static 'img/home/service2.png' %}" alt="">
-            </div>
-            <div class="service-card-body">
-              <h3>Restaurantes</h3>
-              <p>Great so dominion two seed give dry rule be fowl him female you will gathered creeping and created air</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="service-card text-center">
-            <div class="service-card-img">
-              <img class="img-fluid" src="{% static 'img/home/service3.png' %}" alt="">
-            </div>
-            <div class="service-card-body">
-              <h3>Actividades</h3>
-              <p>Great so dominion two seed give dry rule be fowl him female you will gathered creeping and created air</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--================Service Area End =================-->
+  <!--================Hero Banner SM Area End =================-->
 
 
   <!--================About Area Start =================-->
@@ -148,96 +93,6 @@
     </div>
   </section>
   <!--================About Area End =================-->
-
-  <!--================Tour section Start =================-->
-  <section class="section-margin pb-xl-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="tour-card">
-            <img class="card-img rounded-0" src="{% static 'img/home/tour1.png' %}"x alt="">
-            <div class="tour-card-overlay">
-              <div class="media">
-                <div class="media-body">
-                  <h4>Noche en el hotel La Herreria</h4>
-                  <small>5 días</small>
-                  <p>Con varias actividades para ti</p>
-                </div>
-                <div class="media-price">
-                  <h4 class="text-primary">$$/tour</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-lg-10 offset-lg-1">
-              <div class="tour-content">
-                <h2>Ofrecemos varios tours para que conozcas nuestra bella ciudad blanca.</h2>
-                <p>Make she'd moved divided air. Whose tree that hath own upon them it multiply was blessed </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="tour-card">
-            <img class="card-img rounded-0" src="{% static 'img/home/tour2.png' %}" alt="">
-            <div class="tour-card-overlay">
-              <div class="media">
-                <div class="media-body">
-                  <h4>Iglesia Santo Domingo</h4>
-                  <small>Siempre religiosos</small>
-                  <p>Recorrido religioso</p>
-                </div>
-                <div class="media-price">
-                  <h4 class="text-primary">$$/tour</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 col-lg-7">
-          <div class="tour-card">
-            <img class="card-img rounded-0" src="{% static 'img/home/tour3.png' %}" alt="">
-            <div class="tour-card-overlay">
-              <div class="media">
-                <div class="media-body">
-                  <h4>Museo Negret</h4>
-                  <small>Uno de los museos más visitados</small>
-                  <p>Recorrido por el centro donde encontraremos más museos</p>
-                </div>
-                <div class="media-price">
-                  <h4 class="text-primary">$$/tour</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-5">
-          <div class="tour-card">
-            <img class="card-img rounded-0" src="{% static 'img/home/tour4.png' %}" alt="">
-            <div class="tour-card-overlay">
-              <div class="media">
-                <div class="media-body">
-                  <h4>Quieta Margarita</h4>
-                  <small>Restaurante favorito de los payaneses</small>
-                  <p>Panza llena corazón contento</p>
-                </div>
-                <div class="media-price">
-                  <h4 class="text-primary">$$/tour</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--================Tour section End =================-->
 
 
   <!--================Testimonial section Start =================-->
@@ -374,67 +229,6 @@
   <!--================Search Package section End =================-->
 
 
-  <!--================Blog section Start =================-->
-  <section class="section-padding bg-gray">
-    <div class="container">
-      <div class="section-intro text-center pb-90px">
-        <img class="section-intro-img" src="{% static 'img/home/section-icon.png' %}" alt="">
-        <h2>Recomendaciones</h2>
-        <p>Aquí podras ver las recomendaciones que tenemos para ti</p>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card-blog">
-            <img class="card-img rounded-0" src="{% static 'img/blog/blog-1.png' %}" alt="">
-            <div class="card-blog-body">
-              <a href="#">
-                <h4>Museo de historia natural</h4>
-              </a>
-              <ul class="card-blog-info">
-                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>Jan 03, 2018</a></li>
-                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03 Comments</a></li>
-              </ul>
-              <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card-blog">
-            <img class="card-img rounded-0" src="{% static 'img/blog/blog-2.png' %}" alt="">
-            <div class="card-blog-body">
-              <a href="#">
-                <h4>Hotel San Martin</h4>
-              </a>
-              <ul class="card-blog-info">
-                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>Jan 03, 2018</a></li>
-                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03 Comments</a></li>
-              </ul>
-              <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card-blog">
-            <img class="card-img rounded-0" src="{% static 'img/blog/blog-3.png' %}" alt="">
-            <div class="card-blog-body">
-              <a href="#">
-                <h4>El Sabio</h4>
-              </a>
-              <ul class="card-blog-info">
-                <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>Jan 03, 2018</a></li>
-                <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03 Comments</a></li>
-              </ul>
-              <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--================Blog section End =================-->
 
 
   <!-- ================ start footer Area ================= -->

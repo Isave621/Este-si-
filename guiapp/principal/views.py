@@ -39,6 +39,15 @@ def salir(request):
     logout(request)
     return redirect('/')
 
+def contacto(request):
+    return render(request, 'contact.html')
+
+def tour(request):
+    return render(request, 'package.html')
+
+def nosotres(request):
+    return render(request, 'about.html')
+
 def registroUsuario(request):
     data ={
         'form':CustoumUserForm()

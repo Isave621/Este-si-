@@ -26,9 +26,13 @@ urlpatterns = [
     path('indexprincipal/', indexprincipal),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/profile/', inicio),
+    path('accounts/profile/admin/', admin.site.urls),
     path('accounts/profile/salir/', salir),
+    path('accounts/profile/registro/', registroUsuario, name="registroUsuario"),
     path('registro/', registroUsuario, name="registroUsuario"),
-
+    path('accounts/profile/contacto/', contacto),
+    path('accounts/profile/paquete/', tour),
+    path('accounts/profile/sobre/', nosotres),
 
     path('tiporeserva/', ListadoTiporeserva.as_view(template_name = "tiporeserva/inicio.html"), name='1leer'),
     
