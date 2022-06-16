@@ -46,7 +46,7 @@ urlpatterns = [
     path('accounts/profile/servicio/', Servicios),
     path('servicio/', Servicios),
     path('perfil/crear', nuevo_perfil),
-    path('perfil/', Subir, name="publico"),
+    path('perfil/', posts,),
 
 
     path('comentarios/', ListadoComentarios.as_view(template_name = "comentarios/inicio.html"), name='2leer'),

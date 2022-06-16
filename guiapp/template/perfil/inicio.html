@@ -1,4 +1,18 @@
+<!-- <h2>Nuevo Lugar</h2>
+
+{% for post in posts %}
+
+<img src="{{post.imagen.url}}">
 
 
-<h2>Nuevo Lugar</h2>
-<img src="{{post.image.url}}">
+{% endfor %} -->
+
+{% if objeto_especifico %}
+
+     {% if objeto_especifico.imagen %}
+
+     <img class="img-fluid" src="{{ objeto_especifico.imagen.url }}" alt="" />
+
+     {% endif %}
+
+ {% endif %}
