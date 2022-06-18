@@ -31,17 +31,17 @@ from django import forms
 @login_required  
 
 
-def posts(request):
-    posts=Perfil.objects.all()
-    try:
-        objeto_especifico = Perfil.objects.get(nombre=1) # Cambiar por el parametro deseado, pk, codename unico, etc
-    except Perfil.DoesNotExist:
-        objeto_especifico = None
-    return render(request, "perfil/inicio.html", {"posts": posts, 'objeto_especifico': objeto_especifico})
-
 #def posts(request):
-    #posts = Perfil.objects.all().order_by('imagen')
-    #return render(request, 'perfil/inicio.html', {"posts": posts})
+    #posts=Perfil.objects.all()
+    #try:
+       # objeto_especifico = Perfil.objects.get(nombre=1) # Cambiar por el parametro deseado, pk, codename unico, etc
+    #except Perfil.DoesNotExist:
+    #    objeto_especifico = None
+   # return render(request, "perfil/inicio.html", {"posts": posts, 'objeto_especifico': objeto_especifico})
+
+def posts(request):
+    posts = Perfil.objects.all().order_by('imagen')
+    return render(request, 'perfil/inicio.html', {"posts": posts})
 
 def nuevo_perfil(request): 
     form = PerfilForm()
@@ -59,8 +59,10 @@ def nuevo_perfil(request):
 
     return render(request, 'perfil/crear.html', {"form":form})
 
+    
+
 class HotelDetalle (DetailView):
-    model =Comentarios
+    model = Perfil
 
         
         

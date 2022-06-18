@@ -45,8 +45,9 @@ urlpatterns = [
     path('restaurante/', Restaurantes),
     path('accounts/profile/servicio/', Servicios),
     path('servicio/', Servicios),
-    path('perfil/crear', nuevo_perfil),
+    path('perfil/crear/', nuevo_perfil),
     path('perfil/', posts,),
+    path('perfil/este/<int:pk>', HotelDetalle.as_view(template_name = "perfil/este.hmtl"), name='detalle'),
 
 
     path('comentarios/', ListadoComentarios.as_view(template_name = "comentarios/inicio.html"), name='2leer'),
