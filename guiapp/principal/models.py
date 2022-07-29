@@ -222,6 +222,19 @@ class Perfil(models.Model):
     #imagen = models.ImageField(null = True, blank = True)}
     imagen = models.ImageField(upload_to="imagenes" , null=True)
 
+class PerfilUsuario(models.Model):
+    nombre = models.CharField(max_length=200)
+    comentario = models.TextField(null = True, blank = True)
+    imagen = models.ImageField(upload_to="imagenes" , null=True)
+
+
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=200, null = True)
+    correo = models.CharField(max_length=200, null = True)
+    celular = models.CharField(max_length=200, null = True) 
+    descripcion = models.TextField(null = True, blank = True)
+    imagen = models.ImageField(upload_to="imagenes" , null=True)
+
 class Persona(models.Model):
     field_idcliente = models.IntegerField(db_column=' idCliente', primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
     nombre = models.CharField(db_column='Nombre', max_length=45, blank=True, null=True)  # Field name made lowercase.

@@ -1,0 +1,50 @@
+{%load static%}
+
+<header class="header_area">
+    <div class="main_menu">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container box_1620">
+          <a class="navbar-brand logo_h" href="profile/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+            <ul class="nav navbar-nav menu_nav justify-content-end">
+              <li class="nav-item active"><a class="nav-link" href="profile/">Home</a></li> 
+              <li class="nav-item"><a class="nav-link" href="sobre/">Sobre nosotros</a></li> 
+              <li class="nav-item"><a class="nav-link" href="paquete/">Tours</a>
+              <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"></a>
+              <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Perfil</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link" href="admin/">Administrador</a></li>
+                  <li class="nav-item"><a class="nav-link" href="accounts/login/">Usuario</a></li>
+                </ul>
+							</li>
+              <li class="nav-item"><a class="nav-link" href="contacto/">Contactanos</a></li>
+            </ul>
+
+
+             {% if user.is_authenticated %}   
+
+            <div class="nav-right text-center text-lg-right py-4 py-lg-0">
+              <a class="button" href="{% url 'salir' %}">Cerrar Sesion</a>
+
+             {% else %}
+
+            <div class="nav-right text-center text-lg-right py-4 py-lg-0">
+              <a class="button" href="{% url 'login' %}">Iniciar  Sesion</a>
+
+             {% endif %}
+
+            </div>
+          </div> 
+        </div>
+      </nav>
+    </div>
+  </header>

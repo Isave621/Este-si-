@@ -1,3 +1,6 @@
+from http.client import HTTPResponse
+from tkinter import Variable
+from urllib import request
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.mail import send_mail
@@ -5,7 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User 
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegistroForm, PerfilForm
+from django.http import HttpResponse
+
+from .utils import render_to_pdf
+from .forms import RegistroForm
+from django.views.generic import View
 
 
 
@@ -28,66 +35,72 @@ from django import forms
 
 # Create your views here.
 
+
+# Inicio de sesion
+
 @login_required  
-
-
-#def posts(request):
-    #posts=Perfil.objects.all()
-    #try:
-       # objeto_especifico = Perfil.objects.get(nombre=1) # Cambiar por el parametro deseado, pk, codename unico, etc
-    #except Perfil.DoesNotExist:
-    #    objeto_especifico = None
-   # return render(request, "perfil/inicio.html", {"posts": posts, 'objeto_especifico': objeto_especifico})
-
-def posts(request):
-    posts = Perfil.objects.all().order_by('imagen')
-    return render(request, 'perfil/inicio.html', {"posts": posts})
-
-def nuevo_perfil(request): 
-    form = PerfilForm()
-    
-
-    if request.method == 'post':
-        form = PerfilForm(request.post, request.FILES)
-
-        if form.is_valid():
-           post = form.save()
-           return redirect("post:posts")
-
-    else:
-        form = PerfilForm()
-
-    return render(request, 'perfil/crear.html', {"form":form})
-
-    
-
-class HotelDetalle (DetailView):
-    model = Perfil
-
-        
-        
-
-
-
-
-
-
-def inicio(request):
-    return render(request,'index.html')
 
 def salir(request):
     logout(request)
     return redirect('/')
 
+# Fin de inicio de sesion
+
+
+
+# Subir imagenes de los servicios
+
+def posts(request):
+    posts = Perfil.objects.all().order_by('imagen', 'nombre', 'direccion')
+    return render(request, 'hotel.html', {"posts": posts})
+
+# Fin de imagenes de los servicios
+
+
+
+# Formulario comentarios
+
+def formularioPerfil(request):
+    usuario = PerfilUsuario.objects.all().order_by('imagen', 'nombre', 'comentario')
+    variables = {"usuario" : usuario}
+
+    if request.POST: 
+        persona = PerfilUsuario()   
+        persona.nombre = request.POST.get('txtNombre')
+        persona.comentario = request.POST.get('txtComentario')
+        persona.imagen = request.FILES.get('txtImagen')
+
+        try: 
+            persona.save()
+            variables['mensaje'] = 'Guardado'
+        except: 
+            variables['mensaje'] ='No se guardo'
+    
+    return render (request, 'perfil/comentario.html', variables)
+    
+# Fin de formulario comentarios
+
+
+
+# Vista 'principal'
+def inicio(request):
+    return render(request,'index.html')
+
+# Vista de 'contacto'
 def contacto(request):
     return render(request, 'contact.html')
 
+#Vista de 'tour'
 def tour(request):
     return render(request, 'package.html')
 
+#Vista 'sobre nosotros'
 def nosotres(request):
     return render(request, 'about.html')
 
+
+
+# Registro de ususario
 
 class RegistroUsuario(CreateView):
     model = User
@@ -97,28 +110,11 @@ class RegistroUsuario(CreateView):
     def get_success_url(self):        
         return reverse('sesion')
 
-def Hoteles(request):
-    return render(request, 'hotel.html')
-
-def Restaurantes(request):
-    return render(request, 'restaurante.html')
-
-def Servicios(request):
-    return render(request, 'servicio.html')
+# Fin de registro de ususario
 
 
 
-
-
-
-
-def formulario(request):
-    return render (request, "formularioContacto.html")
-
-def indexprincipal(request):
-    return render (request, "index.html")
-
-
+# Formulario contacto
 
 def contactar(request):
     if request.method == "POST":
@@ -128,123 +124,48 @@ def contactar(request):
         email_para = ["jhornym8@gmail.com"]
         send_mail(asunto, mensaje, email_desde, email_para, fail_silently=False)
         return render (request, "contactoExitoso.html")
-    return render (request, "formulario.html")
+    return render (request, "formularioContacto.html")
+
+# Fin de formulario contacto
 
 
 
+# Reportes
+
+class generar_reporte(View):
+    def get(self,request):
+        template_name="reporte.html"
+        hotel=Perfil.objects.all()
+        data = {
+            'count':hotel.count(),
+            'hotel':hotel   
+        }
+        pdf=render_to_pdf(template_name,data)
+        return HttpResponse(pdf,content_type='application/pdf')
+
+# Fin de reportes
 
 
-#
-class ListadoComentarios(ListView):
-    model = Comentarios
+
+#Formulario de perfil de usuario
+
+def UsuarioFormulario(request):
+    persona = Usuario.objects.all().order_by('nombre', 'correo', 'celular', 'descripcion', 'imagen')
+    variables = {"persona" : persona}
+
+    if request.POST: 
+        perfil= Usuario()   
+        perfil.nombre = request.POST.get('txtNombre')
+        perfil.correo = request.POST.get('txtCorreo')
+        perfil.celular = request.POST.get('txtCelular')
+        perfil.descripcion = request.POST.get('txtDescripcion')
+        perfil.imagen = request.FILES.get('txtImagen')
+
+        try: 
+            perfil.save()
+            variables['mensaje'] = 'Guardado'
+        except: 
+            variables['mensaje'] ='No se guardo'
     
+    return render (request, 'perfil/editar.html', variables)
     
-class ComentariosCrear(SuccessMessageMixin, CreateView):
-    model =Comentarios
-    form = Comentarios
-    fields = "__all__"
-    success_message ='Comentarios creada correctamente'
-     
-    def get_success_url(self):        
-        return reverse('2leer') # Redireccionamos a la vista principal 'leer'
-
-class ComentariosDetalle (DetailView):
-    model =Comentarios
-
-class  ComentariosActualizar(SuccessMessageMixin,UpdateView):
-    model =  Comentarios
-    form = Comentarios
-    fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'postres' de nuestra Base de Datos 
-    success_message = 'Comentarios Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Postre 
-
-    def get_success_url(self):               
-        return reverse('2leer') # Redireccionamos a la vista principal 'leer'
-class ComentariosEliminar(SuccessMessageMixin, DeleteView): 
-    model = Comentarios 
-    form = Comentarios
-    fields = "__all__"     
- 
-    # Redireccionamos a la página principal luego de eliminar un registro o postre
-    def get_success_url(self): 
-        success_message = 'Comentarios Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Postre 
-        messages.success (self.request, (success_message))       
-        return reverse('2leer') # Redireccionamos a la vista principal 'leer'
-
-
-
-
-# 
-
-class ListadoEmpresa(ListView):
-    model = Empresa
-    
-    
-class EmpresaCrear(SuccessMessageMixin, CreateView):
-    model =Empresa
-    form = Empresa
-    fields = "__all__"
-    success_message ='Empresa creada correctamente'
-     
-    def get_success_url(self):        
-        return reverse('5leer') # Redireccionamos a la vista principal 'leer'
-
-class EmpresaDetalle (DetailView):
-    model =Empresa
-
-class  EmpresaActualizar(SuccessMessageMixin,UpdateView):
-    model =  Empresa
-    form = Empresa
-    fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'postres' de nuestra Base de Datos 
-    success_message = 'Empresa Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Postre 
-
-    def get_success_url(self):               
-        return reverse('5leer') # Redireccionamos a la vista principal 'leer'
-class EmpresaEliminar(SuccessMessageMixin, DeleteView): 
-    model = Empresa 
-    form = Empresa
-    fields = "__all__"     
- 
-    # Redireccionamos a la página principal luego de eliminar un registro o postre
-    def get_success_url(self): 
-        success_message = 'Empresa Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Postre 
-        messages.success (self.request, (success_message))       
-        return reverse('5leer') # Redireccionamos a la vista principal 'leer'
-
-
-
-#
-class ListadoPersona(ListView):
-    model = Persona
-    
-    
-class PersonaCrear(SuccessMessageMixin, CreateView):
-    model =Persona
-    form = Persona
-    fields = "__all__"
-    success_message ='Persona creada correctamente'
-     
-    def get_success_url(self):        
-        return reverse('13leer') # Redireccionamos a la vista principal 'leer'
-
-class PersonaDetalle (DetailView):
-    model =Persona
-
-class  PersonaActualizar(SuccessMessageMixin,UpdateView):
-    model =  Persona
-    form = Persona
-    fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'postres' de nuestra Base de Datos 
-    success_message = 'Persona Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Postre 
-
-    def get_success_url(self):               
-        return reverse('13leer') # Redireccionamos a la vista principal 'leer'
-class PersonaEliminar(SuccessMessageMixin, DeleteView): 
-    model = Persona 
-    form = Persona
-    fields = "__all__"     
- 
-    # Redireccionamos a la página principal luego de eliminar un registro o postre
-    def get_success_url(self): 
-        success_message = 'Persona Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Postre 
-        messages.success (self.request, (success_message))       
-        return reverse('13leer') # Redireccionamos a la vista principal 'leer'
-

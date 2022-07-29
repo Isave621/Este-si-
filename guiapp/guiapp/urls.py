@@ -24,76 +24,26 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', inicio),
     path('admin/', admin.site.urls),
-    path('formulario/', formulario),
-    path('contactar/', contactar),
-    path('indexprincipal/', indexprincipal),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/profile/', inicio, name="sesion"),
+    path('accounts/profile/', UsuarioFormulario, name="sesion"),
     path('accounts/profile/admin/', admin.site.urls),
     path('accounts/profile/salir/', salir),
-    path('accounts/profile/contacto/', formulario),
-    path('contacto/', formulario),
+    path('accounts/profile/contacto/', contactar),
+    path('contacto/', contactar),
     path('accounts/profile/paquete/', tour),
     path('paquete/', tour),
     path('accounts/profile/sobre/', nosotres),
     path('sobre/', nosotres),
-    path('registro/', RegistroUsuario.as_view(),),
+    path('registro/', RegistroUsuario.as_view(),name="registro"),
     path('accounts/profile/registro/', RegistroUsuario.as_view(),),
-    path('accounts/profile/hotel/', Hoteles),
-    path('hotel/', Hoteles),
-    path('accounts/profile/restaurante/', Restaurantes),
-    path('restaurante/', Restaurantes),
-    path('accounts/profile/servicio/', Servicios),
-    path('servicio/', Servicios),
-    path('perfil/crear/', nuevo_perfil),
-    path('perfil/', posts,),
-    path('perfil/este/<int:pk>', HotelDetalle.as_view(template_name = "perfil/este.hmtl"), name='detalle'),
-
-
-    path('comentarios/', ListadoComentarios.as_view(template_name = "comentarios/inicio.html"), name='2leer'),
- 
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un comentarios o registro 
-    path('comentarios/detalle/<int:pk>', ComentariosDetalle.as_view(template_name = "comentarios/detalle.html"), name='detalles'),
- 
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo comentarios o registro  
-    path('comentarios/crear', ComentariosCrear.as_view(template_name = "comentarios/crear.html"), name='crear'),
- 
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un comentarioso registro de la Base de Datos 
-    path('comentarios/editar/<int:pk>', ComentariosActualizar.as_view(template_name = "comentarios/actualizar.html"), name='actualizar'), 
- 
-    # La ruta 'eliminar' que usaremos para eliminar un comentarios o registro de la Base de Datos 
-    path('comentarios/eliminar/<int:pk>', ComentariosEliminar.as_view(), name='comentarios/eliminar.html'),       
-   
-    path('empresa/', ListadoEmpresa.as_view(template_name = "empresa/inicio.html"), name='5leer'),
- 
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un empresa o registro 
-    path('empresa/detalle/<int:pk>', EmpresaDetalle.as_view(template_name = "empresa/detalle.html"), name='detalles'),
- 
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo empresa o registro  
-    path('empresa/crear', EmpresaCrear.as_view(template_name = "empresa/crear.html"), name='crear'),
- 
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un empresao registro de la Base de Datos 
-    path('empresa/editar/<int:pk>', EmpresaActualizar.as_view(template_name = "empresa/actualizar.html"), name='actualizar'), 
- 
-    # La ruta 'eliminar' que usaremos para eliminar un empresa o registro de la Base de Datos 
-    path('empresa/eliminar/<int:pk>', EmpresaEliminar.as_view(), name='empresa/eliminar.html'),
-
-    path('persona/', ListadoPersona.as_view(template_name = "persona/inicio.html"), name='13leer'),
- 
-    # La ruta 'detalles' en donde mostraremos una página con los detalles de un persona o registro 
-    path('persona/detalle/<int:pk>', PersonaDetalle.as_view(template_name = "persona/detalle.html"), name='detalles'),
- 
-    # La ruta 'crear' en donde mostraremos un formulario para crear un nuevo persona o registro  
-    path('persona/crear', PersonaCrear.as_view(template_name = "persona/crear.html"), name='crear'),
- 
-    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un personao registro de la Base de Datos 
-    path('persona/editar/<int:pk>', PersonaActualizar.as_view(template_name = "persona/actualizar.html"), name='actualizar'), 
- 
-    # La ruta 'eliminar' que usaremos para eliminar un persona o registro de la Base de Datos 
-    path('persona/eliminar/<int:pk>', PersonaEliminar.as_view(), name='persona/eliminar.html'),  
-
-
-    
+    path('accounts/profile/restaurante/', posts),
+    path('restaurante/', posts),
+    path('accounts/profile/servicio/', posts),
+    path('servicio/', posts),
+    path('hotel/', posts,),  
+    path('salir/', salir, name="salir"),
+    path('reportes/', generar_reporte.as_view(), name="generar_reporte"),
+    path('hotel/comentarios/', formularioPerfil)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
