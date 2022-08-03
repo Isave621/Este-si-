@@ -121,9 +121,8 @@ def contactar(request):
         asunto = request.POST ["txtAsunto"]
         mensaje = request.POST["txtMensaje"] + " / Email: " + request.POST["txtEmail"]
         email_desde = settings.EMAIL_HOST_USER
-        email_para = ["jhornym8@gmail.com"]
+        email_para = ["isavelasco1206@gmail.com"]
         send_mail(asunto, mensaje, email_desde, email_para, fail_silently=False)
-        return render (request, "contactoExitoso.html")
     return render (request, "formularioContacto.html")
 
 # Fin de formulario contacto
